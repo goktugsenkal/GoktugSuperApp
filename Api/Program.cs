@@ -1,3 +1,4 @@
+using Core;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -5,13 +6,14 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<IdentityDataContext>(opt =>
+builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseNpgsql
         (builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
-    .AddEntityFrameworkStores<IdentityDataContext>();
+    .AddEntityFrameworkStores<DataContext>();
 
+builder.Services.AddScoped<IFuelLogRepository, FuelLogRepository>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

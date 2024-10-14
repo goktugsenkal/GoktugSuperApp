@@ -52,6 +52,31 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FuelLogs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    FillUpDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    FuelVolumeFilled = table.Column<decimal>(type: "numeric", nullable: false),
+                    FuelVolumeCalculated = table.Column<decimal>(type: "numeric", nullable: false),
+                    PricePerUnit = table.Column<decimal>(type: "numeric", nullable: false),
+                    TotalCost = table.Column<decimal>(type: "numeric", nullable: false),
+                    OdometerReading = table.Column<int>(type: "integer", nullable: false),
+                    FuelStation = table.Column<string>(type: "text", nullable: true),
+                    FuelType = table.Column<string>(type: "text", nullable: true),
+                    PaymentMethod = table.Column<string>(type: "text", nullable: true),
+                    IsTankFull = table.Column<bool>(type: "boolean", nullable: false),
+                    VehiclePlateNumber = table.Column<string>(type: "text", nullable: true),
+                    FuelEfficiency = table.Column<decimal>(type: "numeric", nullable: true),
+                    Notes = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FuelLogs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -212,6 +237,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "FuelLogs");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
