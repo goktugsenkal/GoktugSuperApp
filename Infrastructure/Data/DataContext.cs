@@ -5,22 +5,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Data;
 
-public class DataContext : IdentityDbContext
+public class DataContext : IdentityDbContext<ApplicationUser>
 {
     public DataContext(DbContextOptions<DataContext> options) : base(options)
     {
-        
     }
+
+    // Define your DbSets here
+    public DbSet<FuelLog> FuelLogs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<FuelLog>()
-            .HasOne<IdentityUser>()
-            .WithMany()
-            .HasForeignKey(f => f.UserId)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
+        base.OnModelCreating(builder);
+        
     }
-
-    public DbSet<FuelLog> FuelLogs { get; set; }
 }
