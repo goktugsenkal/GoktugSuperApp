@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class RenameTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -69,7 +69,8 @@ namespace Infrastructure.Migrations
                     IsTankFull = table.Column<bool>(type: "boolean", nullable: false),
                     VehiclePlateNumber = table.Column<string>(type: "text", nullable: true),
                     FuelEfficiency = table.Column<decimal>(type: "numeric", nullable: true),
-                    Notes = table.Column<string>(type: "text", nullable: true)
+                    Notes = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
